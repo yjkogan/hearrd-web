@@ -1,8 +1,7 @@
 import React from "react";
 import { useUsername } from "../contexts/user-context";
 import { fetchRatingTypes } from "../api";
-
-// const API_URL = "https://stag-optimal-starfish.ngrok-free.app/api";
+import { Link } from "react-router-dom";
 
 /*
  * This component fetches a list of ratings types from the API and
@@ -31,7 +30,7 @@ export const RatingsTypesList = () => {
       <ul>
         {ratingsTypes.map((type) => (
           <li key={type}>
-            <a href={`/ratings/${type}`}>{type}s</a>
+            <Link to={`/ratings/${type}`}>{type}s</Link>
           </li>
         ))}
       </ul>
