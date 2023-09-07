@@ -1,5 +1,3 @@
-import { Rating } from "../components/Rating";
-
 export function fetchRatingTypes(username: string): Promise<any> {
   return fetch(`/api/rating_types?username=${username}`, {
     headers: {
