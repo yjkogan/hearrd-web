@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUsername } from "../../contexts/user-context";
 
 const Navbar = () => {
+  const { username } = useUsername();
   return (
     <nav>
       <h1>Hearrd</h1>
@@ -10,14 +12,21 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/ratings">My ratings</Link>
         </li>
         <li>
           <Link to="/ratings/create">New rating</Link>
         </li>
-        <li>
-          <Link to="/nothing-here">Nothing Here</Link>
-        </li>
+        {username && (
+          <li>
+            <Link to="/logout">Logout</Link>
+          </li>
+        )}
+        {!username && (
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

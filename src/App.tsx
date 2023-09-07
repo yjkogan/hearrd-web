@@ -4,10 +4,11 @@ import Navbar from "./components/Navbar";
 import { UsernameProvider, useUsername } from "./contexts/user-context";
 import Home from "./views/Home";
 import RatingsTypesList from "./views/RatingsTypesList";
-import RatingsList from "./views/RatingsListView";
+import RatingsList from "./views/RatingsList";
 import CreateRating from "./views/CreateRating";
 // import Register from "./views/Register";
-import Login from "./views/Login";
+import Login from "./views/auth/Login";
+import Logout from "./views/auth/Logout";
 
 export default function App() {
   /* Routes nest inside one another. Nested route paths build upon
@@ -33,6 +34,7 @@ export default function App() {
           </Route>
           {/* <Route path="/register" element={Register} /> */}
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
 
           {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit

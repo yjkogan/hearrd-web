@@ -8,11 +8,22 @@ export type Rating = {
   value: number;
 };
 
-export const RatingListItem = ({ rating }: { rating: Rating }) => {
+export const RatingListItem = ({
+  rating,
+  onDelete,
+}: {
+  rating: Rating;
+  onDelete: (rating: Rating) => void;
+}) => {
   return (
     <li>
       <span>
         {rating.name} — {rating.value}
+      </span>
+      <span>
+        <button type="button" onClick={() => onDelete(rating)}>
+          Delete
+        </button>
       </span>
     </li>
   );

@@ -3,7 +3,7 @@ import React from "react";
 const UsernameContext = React.createContext<
   | {
       username?: string;
-      setUsername: (username: string) => void;
+      setUsername: (username: string | undefined) => void;
     }
   | undefined
 >(undefined);

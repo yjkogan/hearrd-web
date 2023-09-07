@@ -45,6 +45,29 @@ export function createRating({
   });
 }
 
+export function deleteRating({
+  username,
+  rating_type,
+  rating_name,
+}: {
+  username: string;
+  rating_type: string;
+  rating_name: string;
+}) {
+  return fetch(`/api/ratings`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true",
+    },
+    body: JSON.stringify({
+      username,
+      rating_type,
+      rating_name,
+    }),
+  });
+}
+
 type CreateComparisonParams = {
   username: string;
   rating_id: number;
