@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Link, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { UsernameProvider, useUsername } from "./contexts/user-context";
+import Home from "./views/Home";
 import RatingsTypesList from "./views/RatingsTypesList";
 import RatingsList from "./views/RatingsListView";
 import CreateRating from "./views/CreateRating";
@@ -18,14 +19,7 @@ export default function App() {
     <UsernameProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route
-            index
-            element={
-              <RequireAuth>
-                <RatingsTypesList />
-              </RequireAuth>
-            }
-          />
+          <Route index element={<Home />} />
           <Route
             path="ratings"
             element={
@@ -34,6 +28,7 @@ export default function App() {
               </RequireAuth>
             }
           >
+            <Route index element={<RatingsTypesList />} />
             <Route path=":rating_type" element={<RatingsList />} />
             <Route path="create" element={<CreateRating />} />
             <Route path="compare" element={<CreateComparison />} />
