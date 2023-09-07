@@ -7,7 +7,7 @@ const Logout = () => {
   React.useEffect(() => {
     setUsername(undefined);
     localStorage.removeItem("username");
-  }, []);
+  }, [setUsername]);
 
   return (
     <div>
