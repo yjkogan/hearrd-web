@@ -1,3 +1,5 @@
+import React from "react";
+
 export type Rating = {
   id: number;
   name: string;

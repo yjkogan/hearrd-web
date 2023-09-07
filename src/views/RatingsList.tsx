@@ -11,31 +11,31 @@ import { fetchRatings } from "../api";
  */
 export const RatingsList = () => {
   const [ratings, setRatings] = React.useState<Rating[]>([]);
-  let { ratings_type } = useParams();
+  let { rating_type } = useParams();
   const { username } = useUsername();
 
   React.useEffect(() => {
-    if (!username || !ratings_type) {
+    if (!username || !rating_type) {
       return;
     }
     const fetchAndSetRatings = async () => {
       const response = await fetchRatings({
         username,
-        ratings_type: ratings_type as string,
+        rating_type: rating_type as string,
       });
       const data = await response.json();
       setRatings(data.ratings);
     };
 
     fetchAndSetRatings();
-  }, [username, ratings_type]);
+  }, [username, rating_type]);
 
   return (
     <div>
-      <h1>{ratings_type}s</h1>
+      <h1>{rating_type}s</h1>
       <div>
-        <Link to={`/ratings/${ratings_type}/create`}>
-          Rate another {ratings_type}
+        <Link to={`/ratings/create?rating_type=${rating_type}`}>
+          Rate another {rating_type}
         </Link>
       </div>
       <ol>

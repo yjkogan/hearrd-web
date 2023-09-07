@@ -26,17 +26,14 @@ export default function App() {
             }
           />
           <Route
-            path="ratings/:ratings_type"
+            path="ratings/:rating_type"
             element={
               <RequireAuth>
                 <RatingsList />
               </RequireAuth>
             }
           />
-          <Route
-            path="ratings/:ratings_type/create"
-            element={<CreateRating />}
-          />
+          <Route path="ratings/create" element={<CreateRating />} />
           {/* <Route path="/register" element={Register} /> */}
           <Route path="/login" element={<Login />} />
 
