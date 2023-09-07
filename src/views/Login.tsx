@@ -9,6 +9,7 @@ const Login = () => {
 
   const handleLogin = () => {
     setApplicationUsername(username);
+    localStorage.setItem("username", username);
     navigate("/");
   };
 

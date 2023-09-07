@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import CreateRatingForm from "./CreateRatingForm";
 import { Rating } from "../../components/Rating";
@@ -7,45 +7,32 @@ import RatingComparer, { ComparisonToSend } from "../CreateComparison";
 
 export const CreateRating = () => {
   const navigate = useNavigate();
+  const [ratingAndComparison, setRatingAndComparison] = React.useState<
+    { newRating: Rating; nextComparison: ComparisonToSend } | undefined
+  >(undefined);
 
   const handleComplete = (data: any) => {
     const newRating = data.rating;
     const nextComparison = data.next_comparison;
     if (!nextComparison) {
-      navigate("/ratings/creation_complete", { state: { newRating } });
+      navigate(`/ratings/${newRating.type}`);
       return;
     } else {
-      navigate(`/ratings/compare`, {
-        state: { newRating, nextComparison },
-      });
+      setRatingAndComparison({ newRating, nextComparison });
     }
   };
 
-  return <CreateRatingForm onComplete={handleComplete} />;
-
-  // if (newRating) {
-  //   if (!nextComparison) {
-  //     return (
-  //       <div>
-  //         Thanks for adding your first <strong>{newRating.type}</strong>!{" "}
-  //         <Link to={`/ratings/create?rating_type=${newRating.type}`}>
-  //           Rate another <strong>{newRating.type}</strong>
-  //         </Link>{" "}
-  //         to create a relative ranking."
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <RatingComparer
-  //         newRating={newRating}
-  //         nextComparison={nextComparison}
-  //         setNextComparison={setNextComparison}
-  //       />
-  //     );
-  //   }
-  // } else {
-  // return <CreateRatingForm onComplete={handleComplete} />;
-  // }
+  if (ratingAndComparison) {
+    const { newRating, nextComparison } = ratingAndComparison;
+    return (
+      <RatingComparer
+        newRating={newRating}
+        initialComparison={nextComparison}
+      />
+    );
+  } else {
+    return <CreateRatingForm onComplete={handleComplete} />;
+  }
 };
 
 export default CreateRating;

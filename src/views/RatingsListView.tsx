@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import RatingsList from "../components/RatingsList";
 import { Rating } from "../components/Rating";
@@ -11,12 +11,20 @@ import { fetchRatings } from "../api";
  * displays them in an ordered list.
  */
 export const RatingsListView = () => {
-  const [ratings, setRatings] = React.useState<Rating[]>([]);
+  const [ratings, setRatings] = React.useState<Rating[] | undefined>(undefined);
   let { rating_type } = useParams();
-  const { username } = useUsername();
+  const { username } = useUsername() as { username: string };
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!username || !rating_type) {
+    if (ratings && !ratings.length) {
+      navigate(`/ratings/create?rating_type=${rating_type}`);
+    }
+  }, [ratings, rating_type, navigate]);
+
+  React.useEffect(() => {
+    if (!rating_type) {
+      navigate("/ratings");
       return;
     }
     const fetchAndSetRatings = async () => {
@@ -29,7 +37,11 @@ export const RatingsListView = () => {
     };
 
     fetchAndSetRatings();
-  }, [username, rating_type]);
+  }, [username, rating_type, navigate]);
+
+  if (!ratings) {
+    return <div>Loading...</div>;
+  }
 
   return <RatingsList ratings={ratings} rating_type={rating_type as string} />;
 };

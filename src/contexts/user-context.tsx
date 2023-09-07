@@ -10,7 +10,7 @@ const UsernameContext = React.createContext<
 
 function UsernameProvider({ children }: { children: React.ReactNode }) {
   const [username, setUsername] = React.useState<string | undefined>(
-    "trogdorburns"
+    localStorage.getItem("username") || undefined
   );
   const value = {
     username,

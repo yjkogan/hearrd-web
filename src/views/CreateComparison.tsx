@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Rating } from "../components/Rating";
 import { createComparison } from "../api";
@@ -11,18 +11,17 @@ export type ComparisonToSend = {
   name: string;
 };
 
-export const RatingComparer = () => {
+type Props = {
+  newRating: Rating;
+  initialComparison: ComparisonToSend;
+};
+
+export const RatingComparer = ({ newRating, initialComparison }: Props) => {
   const { username } = useUsername();
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const {
-    newRating,
-    nextComparison: nextComparisonFromState,
-  }: { newRating: Rating; nextComparison: ComparisonToSend } = state;
 
-  const [nextComparison, setNextComparison] = React.useState<ComparisonToSend>(
-    nextComparisonFromState
-  );
+  const [nextComparison, setNextComparison] =
+    React.useState<ComparisonToSend>(initialComparison);
 
   const handleComparison = ({
     isComparisonPreferred,
@@ -41,9 +40,7 @@ export const RatingComparer = () => {
             setNextComparison(data.next_comparison);
             return;
           } else {
-            navigate("/ratings/creation_complete", {
-              state: { newRating, allRatings: data.new_ratings },
-            });
+            navigate(`/ratings/${newRating.type}`);
             return;
           }
         });

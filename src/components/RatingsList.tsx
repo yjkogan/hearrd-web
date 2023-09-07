@@ -18,11 +18,25 @@ export const RatingsList = ({
           Rate another {rating_type}
         </Link>
       </div>
-      <ol>
-        {ratings.map((rating: Rating) => (
-          <RatingListItem key={rating.name} rating={rating} />
-        ))}
-      </ol>
+      {ratings.length > 0 && (
+        <ol>
+          {ratings.map((rating: Rating) => (
+            <RatingListItem key={rating.name} rating={rating} />
+          ))}
+        </ol>
+      )}
+      {ratings.length === 1 && (
+        <p>
+          You've only rated one {rating_type}. You need to rate at least two{" "}
+          {rating_type}s to see a comparison.
+        </p>
+      )}
+      {ratings.length === 0 && (
+        <p>
+          You haven't rated any {rating_type}s yet. You need to rate at least
+          two {rating_type}s to see a comparison.
+        </p>
+      )}
     </div>
   );
 };

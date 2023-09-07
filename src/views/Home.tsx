@@ -8,7 +8,7 @@ export const Home = () => {
   if (!username) {
     return (
       <div>
-        <h2>Not logged in</h2>
+        <h2>You are not logged in</h2>
         <p>
           <Link to="/login">Log in</Link>
         </p>
