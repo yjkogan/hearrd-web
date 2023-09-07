@@ -44,3 +44,34 @@ export function createRating({
     }),
   });
 }
+
+type CreateComparisonParams = {
+  username: string;
+  rating_id: number;
+  comparison: {
+    id: number;
+    index: number;
+  };
+  isComparisonPreferred: boolean;
+};
+
+export function createComparison({
+  username,
+  rating_id,
+  comparison,
+  isComparisonPreferred,
+}: CreateComparisonParams) {
+  return fetch(`/api/ratings/compare`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true",
+    },
+    body: JSON.stringify({
+      username,
+      rating_id,
+      comparison,
+      is_comparison_preferred: isComparisonPreferred,
+    }),
+  });
+}

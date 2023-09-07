@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { Rating, RatingListItem } from "../components/Rating";
+import RatingsList from "../components/RatingsList";
+import { Rating } from "../components/Rating";
 import { useUsername } from "../contexts/user-context";
 import { fetchRatings } from "../api";
 
@@ -9,7 +10,7 @@ import { fetchRatings } from "../api";
  * This component fetches a list of ratings from the API and
  * displays them in an ordered list.
  */
-export const RatingsList = () => {
+export const RatingsListView = () => {
   const [ratings, setRatings] = React.useState<Rating[]>([]);
   let { rating_type } = useParams();
   const { username } = useUsername();
@@ -30,21 +31,7 @@ export const RatingsList = () => {
     fetchAndSetRatings();
   }, [username, rating_type]);
 
-  return (
-    <div>
-      <h1>{rating_type}s</h1>
-      <div>
-        <Link to={`/ratings/create?rating_type=${rating_type}`}>
-          Rate another {rating_type}
-        </Link>
-      </div>
-      <ol>
-        {ratings.map((rating: Rating) => (
-          <RatingListItem key={rating.name} rating={rating} />
-        ))}
-      </ol>
-    </div>
-  );
+  return <RatingsList ratings={ratings} rating_type={rating_type as string} />;
 };
 
-export default RatingsList;
+export default RatingsListView;

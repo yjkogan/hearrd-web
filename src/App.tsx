@@ -3,8 +3,9 @@ import { Routes, Route, Link, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { UsernameProvider, useUsername } from "./contexts/user-context";
 import RatingsTypesList from "./views/RatingsTypesList";
-import RatingsList from "./views/RatingsList";
+import RatingsList from "./views/RatingsListView";
 import CreateRating from "./views/CreateRating";
+import CreateComparison from "./views/CreateComparison";
 // import Register from "./views/Register";
 import Login from "./views/Login";
 
@@ -26,14 +27,17 @@ export default function App() {
             }
           />
           <Route
-            path="ratings/:rating_type"
+            path="ratings"
             element={
               <RequireAuth>
-                <RatingsList />
+                <Outlet />
               </RequireAuth>
             }
-          />
-          <Route path="ratings/create" element={<CreateRating />} />
+          >
+            <Route path=":rating_type" element={<RatingsList />} />
+            <Route path="create" element={<CreateRating />} />
+            <Route path="compare" element={<CreateComparison />} />
+          </Route>
           {/* <Route path="/register" element={Register} /> */}
           <Route path="/login" element={<Login />} />
 
