@@ -23,7 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-staging": "gcloud storage cp -R build/* gs://hearrd-web-staging"
+    "deploy-staging": "gcloud storage cp -R build/* gs://hearrd-web-staging",
+    "set-css-metadata": "gcloud storage ls --recursive gs://hearrd-web-staging/static/ | grep '\\.css' | xargs -I{} gcloud storage objects update \"{}\" --cache-control=public,max-age=31536000",
+    "set-js-metadata": "gcloud storage ls --recursive gs://hearrd-web-staging/static/ | grep '\\.js' | xargs -I{} gcloud storage objects update \"{}\" --cache-control=public,max-age=31536000"
   },
   "proxy": "https://stag-optimal-starfish.ngrok-free.app/",
   "eslintConfig": {

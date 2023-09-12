@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
  */
 export const RatingsTypesList = () => {
   const [ratingsTypes, setRatingsTypes] = React.useState<string[]>([]);
+  const [error, setError] = React.useState<string | undefined>(undefined);
   const { username } = useUsername();
 
   React.useEffect(() => {
@@ -18,7 +19,11 @@ export const RatingsTypesList = () => {
     const fetchAndSetRatingsTypes = async () => {
       const response = await fetchRatingTypes(username);
       const data = await response.json();
-      setRatingsTypes(data.rating_types);
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setRatingsTypes(data.rating_types);
+      }
     };
 
     fetchAndSetRatingsTypes();
@@ -27,6 +32,7 @@ export const RatingsTypesList = () => {
   return (
     <div>
       <h1>Ratings Types</h1>
+      {error && <div>{error}</div>}
       <ul>
         {ratingsTypes.map((type) => (
           <li key={type}>
