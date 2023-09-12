@@ -16,15 +16,14 @@ export const RatingListItem = ({
   onDelete: (rating: Rating) => void;
 }) => {
   return (
-    <li>
-      <span>
-        {rating.name} — {rating.value}
-      </span>
-      <span>
-        <button type="button" onClick={() => onDelete(rating)}>
-          Delete
-        </button>
-      </span>
+    <li key={rating.name}>
+      {rating.name} — {rating.value}
+      <button
+        className="ml-4 text-red-500 hover:text-red-700"
+        onClick={() => onDelete(rating)}
+      >
+        Delete
+      </button>
     </li>
   );
 };

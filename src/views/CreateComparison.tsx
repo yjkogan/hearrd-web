@@ -50,23 +50,25 @@ export const RatingComparer = ({ newRating, initialComparison }: Props) => {
     });
   };
   return (
-    <div>
-      <h2>Which of these {newRating.type}s do you prefer?</h2>
-      <div>
-        <button
-          type="button"
+    <div className="flex flex-col items-center justify-center p-6 space-y-4">
+      <h1 className="text-2xl font-bold text-gray-700 mb-4">
+        Which of these {newRating.type}s do you prefer?
+      </h1>
+
+      <div className="flex flex-col md:flex-row justify-between items-center w-full space-y-4 md:space-y-0">
+        <div
+          className="bg-white p-4 rounded shadow-lg flex-1 cursor-pointer hover:scale-105 transition-transform"
           onClick={() => handleComparison({ isComparisonPreferred: false })}
         >
-          {newRating.name}
-        </button>
-      </div>
-      <div>
-        <button
-          type="button"
+          <h2 className="font-bold text-xl mb-2">{newRating.name}</h2>
+        </div>
+        <h3 className="mx-6 text-xl">VS</h3>{" "}
+        <div
+          className="bg-white p-4 rounded shadow-lg flex-1 cursor-pointer hover:scale-105 transition-transform"
           onClick={() => handleComparison({ isComparisonPreferred: true })}
         >
-          {nextComparison.name}
-        </button>
+          <h2 className="font-bold text-xl mb-2">{nextComparison.name}</h2>
+        </div>
       </div>
     </div>
   );

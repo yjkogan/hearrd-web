@@ -18,8 +18,8 @@ export default function App() {
   return (
     <UsernameProvider>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route element={<Layout />}>
           <Route
             path="ratings"
             element={
@@ -48,15 +48,11 @@ export default function App() {
 
 function Layout() {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100">
       <Navbar />
-
-      <hr />
-
-      {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
-      <Outlet />
+      <main className="container mx-auto p-4 md:p-8">
+        <Outlet />
+      </main>
     </div>
   );
 }

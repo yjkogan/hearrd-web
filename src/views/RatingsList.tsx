@@ -57,35 +57,38 @@ export const RatingsList = () => {
   }
 
   return (
-    <div>
-      <h1>{rating_type}s</h1>
-      <div>
-        <Link to={`/ratings/create?rating_type=${rating_type}`}>
-          Rate another {rating_type}
-        </Link>
-      </div>
-      {ratings.length > 0 && (
-        <ol>
-          {ratings.map((rating: Rating) => (
-            <RatingListItem
-              key={rating.name}
-              rating={rating}
-              onDelete={handleDelete}
-            />
-          ))}
-        </ol>
-      )}
-      {ratings.length === 1 && (
-        <p>
-          You've only rated one {rating_type}. You need to rate at least two{" "}
-          {rating_type}s to see a comparison.
-        </p>
-      )}
+    <div className="space-y-4">
+      <h2 className="text-xl font-semibold mb-4">Your {rating_type} ratings</h2>
+
+      <Link
+        to={`/ratings/create?rating_type=${rating_type}`}
+        className="inline-block bg-blue-200 px-4 py-2 rounded hover:bg-blue-300 mb-4"
+      >
+        Rate More {rating_type}s
+      </Link>
+
       {ratings.length === 0 && (
         <p>
-          You haven't rated any {rating_type}s yet. You need to rate at least
-          two {rating_type}s to see a comparison.
+          You have no ratings for {rating_type}s. Rate two items of this type to
+          see a comparison!
         </p>
+      )}
+
+      {ratings.length > 0 && (
+        <div>
+          {ratings.length === 1 && (
+            <p>You need to rate a second {rating_type} to see a comparison.</p>
+          )}
+          <ul className="list-disc pl-5 space-y-2">
+            {ratings.map((rating: Rating) => (
+              <RatingListItem
+                key={rating.name}
+                rating={rating}
+                onDelete={handleDelete}
+              />
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

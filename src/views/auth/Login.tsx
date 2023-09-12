@@ -1,29 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useUsername } from "../../contexts/user-context";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = React.useState("");
   const { setUsername: setApplicationUsername } = useUsername();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
     setApplicationUsername(username);
     localStorage.setItem("username", username);
-    navigate("/");
+    navigate("/ratings");
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
+    <div className="flex items-center justify-center py-12">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-8 rounded-lg shadow-2xl w-96"
+      >
+        <h2 className="text-4xl mb-4 font-bold text-blue-500">Discord Login</h2>
+        <p className="mb-4 text-gray-600">
+          Enter your Discord username to proceed.
+        </p>
         <input
-          type="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Discord Username"
+          className="w-full p-2 border rounded mb-4"
+          placeholder="Username"
+          required // Ensures the input is not empty when submitting.
         />
-        <button onClick={handleLogin}>Login</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
+          Let's Go!
+        </button>
       </form>
     </div>
   );
