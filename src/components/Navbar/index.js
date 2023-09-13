@@ -51,6 +51,7 @@ const Navbar = () => {
         </ul>
         {/* Mobile Menu Button */}
         <button
+          aria-label="Open Menu"
           className="md:hidden flex flex-col items-center text-white w-6 h-6 justify-between"
           onClick={() => setMenuOpen(!menuOpen)}
         >

@@ -33,6 +33,7 @@ const Login = () => {
         />
         <button
           type="submit"
+          aria-label="Let's Go!"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
           Let's Go!

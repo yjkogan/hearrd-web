@@ -47,8 +47,11 @@ export const CreateRatingForm = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && <p className="text-red-500">Error while saving: {error}</p>}
       <div className="border rounded p-4 bg-blue-50">
-        <label className="block mb-2 font-medium">Rating Type</label>
+        <label htmlFor="rating_type" className="block mb-2 font-medium">
+          Rating Type
+        </label>
         <input
+          id="rating_type"
           type="text"
           value={rating_type}
           onChange={(e) => setRatingType(e.target.value)}
@@ -57,8 +60,11 @@ export const CreateRatingForm = ({
       </div>
 
       <div className="border rounded p-4 bg-pink-50">
-        <label className="block mb-2 font-medium">Rating Name</label>
+        <label htmlFor="rating_name" className="block mb-2 font-medium">
+          Rating Name
+        </label>
         <input
+          id="rating_name"
           type="text"
           value={rating_name}
           onChange={(e) => setRatingName(e.target.value)}

@@ -9,6 +9,7 @@ import CreateRating from "./views/CreateRating";
 // import Register from "./views/Register";
 import Login from "./views/auth/Login";
 import Logout from "./views/auth/Logout";
+import Footer from "./components/Footer";
 
 export default function App() {
   /* Routes nest inside one another. Nested route paths build upon
@@ -53,6 +54,7 @@ function Layout() {
       <main className="container mx-auto p-4 md:p-8">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }

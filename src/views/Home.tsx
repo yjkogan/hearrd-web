@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUsername } from "../contexts/user-context";
+import Footer from "../components/Footer";
 
 export const Home = () => {
   const { username } = useUsername();
@@ -27,7 +28,7 @@ export const Home = () => {
 
       {/* Benefits */}
       <div className="mb-8 w-full max-w-xl space-y-4 text-center mx-auto">
-        <h3 className="text-2xl mb-4 font-semibold">Benefits</h3>
+        <h2 className="text-2xl mb-4 font-semibold">Benefits</h2>
         <ul className="list-disc list-inside text-lg space-y-2">
           <li>Endless Categories: From music to munchies, we've got it all!</li>
           <li>
@@ -43,7 +44,7 @@ export const Home = () => {
 
       {/* How It Works */}
       <div className="mb-8 w-full max-w-xl text-center mx-auto">
-        <h3 className="text-2xl mb-4 font-semibold">How It Works:</h3>
+        <h2 className="text-2xl mb-4 font-semibold">How It Works:</h2>
         <ul className="list-decimal list-inside text-lg space-y-2">
           <li>Choose or Add a Category.</li>
           <li>Rate & Rank Your Favorites.</li>
@@ -81,6 +82,7 @@ export const Home = () => {
           </Link>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

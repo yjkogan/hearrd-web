@@ -20,6 +20,7 @@ export const RatingListItem = ({
       {rating.name} — {rating.value}
       <button
         className="ml-4 text-red-500 hover:text-red-700"
+        aria-label={`Delete ${rating.name}`}
         onClick={() => onDelete(rating)}
       >
         Delete
